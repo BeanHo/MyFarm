@@ -41,6 +41,8 @@ return [
 
     'debug' => env('APP_DEBUG', false),
 
+    'log' => 'daily',
+
     /*
     |--------------------------------------------------------------------------
     | Application URL
@@ -65,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'PRC',
 
     /*
     |--------------------------------------------------------------------------
@@ -150,6 +152,7 @@ return [
         /*
          * Package Service Providers...
          */
+        TCG\Voyager\VoyagerServiceProvider::class,
 
         /*
          * Application Service Providers...
