@@ -16,6 +16,12 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\Event' => [
             'App\Listeners\EventListener',
         ],
+
+        // 注册
+        'App\Events\RegisterEvent' => [
+            'App\Listeners\RegisterForGoldbeanListener',
+            'App\Listeners\RegisterForPotatoListener',
+        ],
     ];
 
     /**
