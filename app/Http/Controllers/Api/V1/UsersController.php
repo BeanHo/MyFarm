@@ -79,7 +79,8 @@ class UsersController extends Controller
      */
     public function me(Request $request)
     {
-        return new UserResource(User::with('userData:user_id,potato_num,gold_num')->find(5));
+        $user = $this->user();
+        return new UserResource($user);
         return UserResource::collection(User::with('userData:user_id,potato_num,gold_num')->where('id', '>', 1)->paginate());
     }
 
