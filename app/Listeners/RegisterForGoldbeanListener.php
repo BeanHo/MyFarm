@@ -34,10 +34,10 @@ class RegisterForGoldbeanListener
             GoldbeanLog::create([
                 'user_id' => $event->user->id,
                 'type' => 1,
-                'num' => $goldbeanSetting['num']
+                'num' => $goldbeanSetting
             ]);
             UserData::where('user_id', $event->user->id)
-                ->increment('gold_num', $goldbeanSetting['num']);
+                ->increment('gold_num', $goldbeanSetting);
         }
 
     }

@@ -22,7 +22,7 @@ $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', [
     'namespace' => 'App\Http\Controllers\Api\V1',
-    'middleware' => ['serializer:array', 'bindings', 'change-locale', 'cors']
+    'middleware' => ['serializer:array', 'bindings']
 ], function($api) {
 
     // 登录相关接口
@@ -42,5 +42,11 @@ $api->version('v1', [
         $api->post('email/auth', 'AuthController@emailStore')
             ->name('api.email.auth.store');
     });
+
+
+
+    // 当前登录用户信息
+    $api->get('user', 'UsersController@me')
+        ->name('api.user.show');
 
 });

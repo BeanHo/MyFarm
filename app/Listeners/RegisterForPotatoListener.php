@@ -3,6 +3,9 @@
 namespace App\Listeners;
 
 use App\Events\RegisterEvent;
+use App\PotatoLog;
+use App\PotatoSetting;
+use App\UserData;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 

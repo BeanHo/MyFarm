@@ -3,10 +3,17 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Events\RegisterEvent;
+use App\GoldbeanLog;
 use App\Http\Requests\Api\RegisterRequest;
+use App\Http\Resources\UserResource;
+use App\PotatoLog;
+use App\PotatoSetting;
+use App\Transformers\UserTransformer;
 use App\User;
 use App\UserData;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Request;
 
 class UsersController extends Controller
 {
@@ -21,7 +28,7 @@ class UsersController extends Controller
     public function store(RegisterRequest $request)
     {
         $username = $request->username;
-        $user = [];
+        $user['name'] = $username;
         if (filter_var($username, FILTER_VALIDATE_EMAIL)) {
             $exist = User::where('email', $username)->first();
             if ($exist) {
@@ -62,6 +69,18 @@ class UsersController extends Controller
                 'expires_in' => Auth::guard('api')->factory()->getTTL() * 60
             ])
             ->setStatusCode(201);
+    }
+
+    /**
+     * 用户信息
+     *
+     * @param Request $request
+     * @return UserResource|\Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
+    public function me(Request $request)
+    {
+        return new UserResource(User::with('userData:user_id,potato_num,gold_num')->find(5));
+        return UserResource::collection(User::with('userData:user_id,potato_num,gold_num')->where('id', '>', 1)->paginate());
     }
 
 }

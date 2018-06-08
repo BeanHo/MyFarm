@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Api;
 
-use Illuminate\Foundation\Http\FormRequest;
+use Dingo\Api\Http\FormRequest;
 
 class RegisterRequest extends FormRequest
 {
@@ -13,7 +13,7 @@ class RegisterRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,21 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'username' => 'required',
+            'password' =>'required|min:6|confirmed',
+            'password_confirmation' => 'required|min:6'
         ];
+    }
+
+    public function attributes()
+    {
+        if (\App::isLocale('zh-CN')) {
+            return [
+                'username' => '邮箱',
+                'password'  => '密码',
+                'password_confirmation'  => '确认密码'
+            ];
+        }
+        return [];
     }
 }

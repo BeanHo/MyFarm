@@ -47,4 +47,14 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    /**
+     * 关联用户信息模型
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function userData()
+    {
+        return $this->hasOne('App\UserData')->select(['id', 'user_id', 'potato_num', 'potato_num', 'truename', 'Invitation_code']);
+    }
 }
