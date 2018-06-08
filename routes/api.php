@@ -39,8 +39,8 @@ $api->version('v1', [
         $api->post('users', 'UsersController@store')
             ->name('api.users.store');
         // 账密登录
-        $api->post('email/auth', 'AuthController@emailStore')
-            ->name('api.email.auth.store');
+        $api->post('account/auth', 'AuthController@store')
+            ->name('api.account.auth.store');
     });
 
 

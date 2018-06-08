@@ -22,6 +22,10 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\RegisterForGoldbeanListener',
             'App\Listeners\RegisterForPotatoListener',
         ],
+        // 登录
+        'App\Events\LoginEvent' => [
+            'App\Listeners\DailyLoginForPotatoListener',
+        ],
     ];
 
     /**
